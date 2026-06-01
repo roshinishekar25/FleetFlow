@@ -1,25 +1,19 @@
 import { useEffect, useState } from "react";
-
 import axios from "axios";
-
 
 function Customers() {
 
   const [customers, setCustomers] = useState([]);
 
   const [full_name, setFullName] = useState("");
-
   const [phone, setPhone] = useState("");
-
   const [email, setEmail] = useState("");
-
 
   useEffect(() => {
 
     fetchCustomers();
 
   }, []);
-
 
   const fetchCustomers = async () => {
 
@@ -41,7 +35,6 @@ function Customers() {
 
   };
 
-
   const addCustomer = async () => {
 
     try {
@@ -51,26 +44,19 @@ function Customers() {
         "http://localhost:5000/api/customers",
 
         {
-
           full_name,
           phone,
           email
-
         }
 
       );
 
-
       alert("Customer Added Successfully");
-
 
       fetchCustomers();
 
-
       setFullName("");
-
       setPhone("");
-
       setEmail("");
 
     }
@@ -79,12 +65,11 @@ function Customers() {
 
       console.log(error);
 
-      alert(error.response.data.error);
+      alert("Failed to Add Customer");
 
     }
 
   };
-
 
   const deleteCustomer = async (id) => {
 
@@ -96,9 +81,7 @@ function Customers() {
 
       );
 
-
       alert("Customer Deleted Successfully");
-
 
       fetchCustomers();
 
@@ -108,33 +91,23 @@ function Customers() {
 
       console.log(error);
 
-      alert(error.response.data.error);
+      alert("Failed to Delete Customer");
 
     }
 
   };
 
-
   return (
 
-    <div style={{ padding: "20px" }}>
+    <div>
 
-      <h1>Customers Management</h1>
+      <div className="page-header">
 
+        <h1>Customers Management</h1>
 
-      <div
-        style={{
+      </div>
 
-          display: "flex",
-
-          gap: "10px",
-
-          marginBottom: "20px",
-
-          flexWrap: "wrap"
-
-        }}
-      >
+      <div className="form-container">
 
         <input
           type="text"
@@ -145,7 +118,6 @@ function Customers() {
           }
         />
 
-
         <input
           type="text"
           placeholder="Phone"
@@ -154,7 +126,6 @@ function Customers() {
             setPhone(e.target.value)
           }
         />
-
 
         <input
           type="email"
@@ -165,7 +136,6 @@ function Customers() {
           }
         />
 
-
         <button onClick={addCustomer}>
 
           Add Customer
@@ -174,33 +144,21 @@ function Customers() {
 
       </div>
 
-
-      <table
-        border="1"
-        cellPadding="10"
-        style={{
-          width: "100%"
-        }}
-      >
+      <table>
 
         <thead>
 
           <tr>
 
             <th>ID</th>
-
             <th>Name</th>
-
             <th>Phone</th>
-
             <th>Email</th>
-
             <th>Actions</th>
 
           </tr>
 
         </thead>
-
 
         <tbody>
 
@@ -209,24 +167,32 @@ function Customers() {
             <tr key={customer.customer_id}>
 
               <td>{customer.customer_id}</td>
-
               <td>{customer.full_name}</td>
-
               <td>{customer.phone}</td>
-
               <td>{customer.email}</td>
 
               <td>
 
                 <button
-                  onClick={() =>
-                    deleteCustomer(customer.customer_id)
-                  }
-                >
+  className="delete-btn"
+  onClick={() => {
 
-                  Delete
+    if (
+      window.confirm(
+        "Are you sure you want to delete this customer?"
+      )
+    ) {
 
-                </button>
+      deleteCustomer(customer.customer_id);
+
+    }
+
+  }}
+>
+
+  Delete
+
+</button>
 
               </td>
 

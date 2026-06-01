@@ -5,50 +5,23 @@ import axios from "axios";
 
 function Dashboard() {
 
-  const [driversCount, setDriversCount] = useState(0);
-
-  const [vehiclesCount, setVehiclesCount] = useState(0);
-
-  const [tripsCount, setTripsCount] = useState(0);
-
-  const [customersCount, setCustomersCount] = useState(0);
-
+  const [stats, setStats] = useState({});
 
   useEffect(() => {
 
-    fetchDashboardData();
+    fetchStats();
 
   }, []);
 
-
-  const fetchDashboardData = async () => {
+  const fetchStats = async () => {
 
     try {
 
-      const drivers = await axios.get(
-        "http://localhost:5000/api/drivers"
+      const response = await axios.get(
+        "http://localhost:5000/api/dashboard"
       );
 
-      const vehicles = await axios.get(
-        "http://localhost:5000/api/vehicles"
-      );
-
-      const trips = await axios.get(
-        "http://localhost:5000/api/trips"
-      );
-
-      const customers = await axios.get(
-        "http://localhost:5000/api/customers"
-      );
-
-
-      setDriversCount(drivers.data.length);
-
-      setVehiclesCount(vehicles.data.length);
-
-      setTripsCount(trips.data.length);
-
-      setCustomersCount(customers.data.length);
+      setStats(response.data);
 
     }
 
@@ -60,110 +33,69 @@ function Dashboard() {
 
   };
 
-
   return (
 
-    <div style={{ padding: "20px" }}>
+    <div>
 
-      <h1>FleetFlow Dashboard</h1>
+      <h1 className="page-title">
 
-      <p>Welcome to FleetFlow Admin Dashboard</p>
+        FleetFlow Admin Dashboard
+
+      </h1>
 
 
-      <div
-        style={{
+      <div className="card-container">
 
-          display: "flex",
+        <div className="dashboard-card">
 
-          gap: "20px",
+          <h3>Total Drivers</h3>
 
-          marginTop: "30px",
-
-          flexWrap: "wrap"
-
-        }}
-      >
-
-        <div
-          style={{
-
-            border: "1px solid gray",
-
-            padding: "20px",
-
-            width: "200px",
-
-            borderRadius: "10px"
-
-          }}
-        >
-
-          <h2>Total Drivers</h2>
-
-          <h1>{driversCount}</h1>
+          <p>{stats.totalDrivers}</p>
 
         </div>
 
 
-        <div
-          style={{
+        <div className="dashboard-card">
 
-            border: "1px solid gray",
+          <h3>Total Vehicles</h3>
 
-            padding: "20px",
-
-            width: "200px",
-
-            borderRadius: "10px"
-
-          }}
-        >
-
-          <h2>Total Vehicles</h2>
-
-          <h1>{vehiclesCount}</h1>
+          <p>{stats.totalVehicles}</p>
 
         </div>
 
 
-        <div
-          style={{
+        <div className="dashboard-card">
 
-            border: "1px solid gray",
+          <h3>Total Customers</h3>
 
-            padding: "20px",
-
-            width: "200px",
-
-            borderRadius: "10px"
-
-          }}
-        >
-
-          <h2>Total Trips</h2>
-
-          <h1>{tripsCount}</h1>
+          <p>{stats.totalCustomers}</p>
 
         </div>
 
 
-        <div
-          style={{
+        <div className="dashboard-card">
 
-            border: "1px solid gray",
+          <h3>Total Orders</h3>
 
-            padding: "20px",
+          <p>{stats.totalOrders}</p>
 
-            width: "200px",
+        </div>
 
-            borderRadius: "10px"
 
-          }}
-        >
+        <div className="dashboard-card">
 
-          <h2>Total Customers</h2>
+          <h3>Total Trips</h3>
 
-          <h1>{customersCount}</h1>
+          <p>{stats.totalTrips}</p>
+
+        </div>
+
+
+        <div className="dashboard-card">
+
+          <h3>Total Payments</h3>
+
+          <p>{stats.totalPayments}</p>
 
         </div>
 

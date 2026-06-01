@@ -125,13 +125,11 @@ function Drivers() {
 
     try {
 
-      const response = await axios.delete(
+      await axios.delete(
 
         `http://localhost:5000/api/drivers/${id}`
 
       );
-
-      console.log(response.data);
 
       alert("Driver Deleted Successfully");
 
@@ -151,18 +149,16 @@ function Drivers() {
 
   return (
 
-    <div style={{ padding: "20px" }}>
+    <div>
 
-      <h1>Drivers Management</h1>
+      <div className="page-header">
 
-      <div
-        style={{
-          display: "flex",
-          gap: "10px",
-          marginBottom: "20px",
-          flexWrap: "wrap"
-        }}
-      >
+        <h1>Drivers Management</h1>
+
+      </div>
+
+
+      <div className="form-container">
 
         <input
           type="text"
@@ -237,13 +233,8 @@ function Drivers() {
 
       </div>
 
-      <table
-        border="1"
-        cellPadding="10"
-        style={{
-          width: "100%"
-        }}
-      >
+
+      <table>
 
         <thead>
 
@@ -261,6 +252,7 @@ function Drivers() {
 
         </thead>
 
+
         <tbody>
 
           {drivers.map((driver) => (
@@ -268,10 +260,29 @@ function Drivers() {
             <tr key={driver.driver_id}>
 
               <td>{driver.driver_id}</td>
+
               <td>{driver.full_name}</td>
+
               <td>{driver.phone}</td>
+
               <td>{driver.license_no}</td>
-              <td>{driver.status}</td>
+
+              <td>
+
+                <span
+                  className={`status-badge ${
+                    driver.status === "Available"
+                      ? "status-active"
+                      : "status-pending"
+                  }`}
+                >
+
+                  {driver.status}
+
+                </span>
+
+              </td>
+
               <td>{driver.rating}</td>
 
               <td>
@@ -294,7 +305,9 @@ function Drivers() {
 
                 </button>
 
+
                 <button
+                  className="delete-btn"
                   onClick={() =>
                     deleteDriver(driver.driver_id)
                   }

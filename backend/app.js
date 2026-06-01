@@ -21,6 +21,12 @@ const customerRoutes = require("./routes/customerRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 
 
+const paymentRoutes = require("./routes/paymentRoutes");
+
+
+const dashboardRoutes = require("./routes/dashboardRoutes");
+
+
 // MIDDLEWARE
 
 app.use(cors());
@@ -39,6 +45,10 @@ app.use("/api/trips", tripRoutes);
 app.use("/api/customers", customerRoutes);
 
 app.use("/api/orders", orderRoutes);
+
+app.use("/api/payments", paymentRoutes);
+
+app.use("/api/dashboard", dashboardRoutes);
 
 
 // TEST ROUTE

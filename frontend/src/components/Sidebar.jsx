@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
-
+import {
+  FaTachometerAlt,
+  FaUsers,
+  FaTruck,
+  FaUserFriends,
+  FaClipboardList,
+  FaRoute,
+  FaMoneyBillWave
+} from "react-icons/fa";
 
 
 function Sidebar() {
@@ -25,16 +33,20 @@ function Sidebar() {
         </li>
 
         <li>
+          <Link to="/customers">Customers</Link>
+        </li>
+
+        <li>
+          <Link to="/orders">Orders</Link>
+        </li>
+
+        <li>
           <Link to="/trips">Trips</Link>
         </li>
 
         <li>
           <Link to="/payments">Payments</Link>
         </li>
-
-        <li><Link to="/customers">Customers</Link></li>
-
-        <li><Link to="/orders">Orders</Link></li>
 
       </ul>
 

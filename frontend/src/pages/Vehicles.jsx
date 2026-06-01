@@ -55,11 +55,8 @@ function Vehicles() {
         {
 
           driver_id,
-
           vehicle_number,
-
           vehicle_type,
-
           capacity
 
         }
@@ -87,7 +84,7 @@ function Vehicles() {
 
       console.log(error);
 
-      alert(error.response.data.error);
+      alert("Failed to Add Vehicle");
 
     }
 
@@ -116,7 +113,7 @@ function Vehicles() {
 
       console.log(error);
 
-      alert(error.response.data.error);
+      alert("Failed to Delete Vehicle");
 
     }
 
@@ -125,24 +122,16 @@ function Vehicles() {
 
   return (
 
-    <div style={{ padding: "20px" }}>
+    <div>
 
-      <h1>Vehicles Management</h1>
+      <div className="page-header">
+
+        <h1>Vehicles Management</h1>
+
+      </div>
 
 
-      <div
-        style={{
-
-          display: "flex",
-
-          gap: "10px",
-
-          marginBottom: "20px",
-
-          flexWrap: "wrap"
-
-        }}
-      >
+      <div className="form-container">
 
         <input
           type="number"
@@ -193,13 +182,7 @@ function Vehicles() {
       </div>
 
 
-      <table
-        border="1"
-        cellPadding="10"
-        style={{
-          width: "100%"
-        }}
-      >
+      <table>
 
         <thead>
 
@@ -241,15 +224,25 @@ function Vehicles() {
               <td>
 
                 <button
-                  onClick={() =>
-                    deleteVehicle(vehicle.vehicle_id)
-                  }
-                >
+  className="delete-btn"
+  onClick={() => {
 
-                  Delete
+    if (
+      window.confirm(
+        "Are you sure you want to delete this vehicle?"
+      )
+    ) {
 
-                </button>
+      deleteVehicle(vehicle.vehicle_id);
 
+    }
+
+  }}
+>
+
+  Delete
+
+</button>
               </td>
 
             </tr>
